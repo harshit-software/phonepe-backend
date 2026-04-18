@@ -13,9 +13,9 @@ connectToDB();
 
 const swaggerSpec = require("./src/swagger");
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -24,7 +24,18 @@ app.get("/", (req, res) => {
   res.send("PhonePe Backend Homepage");
 });
 
+// For Render
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
-  console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+  console.log(`Server is running on ${BASE_URL}`);
+  console.log(`Swagger Docs available at ${BASE_URL}/api-docs`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("Unhandled Rejection:", err);
 });
