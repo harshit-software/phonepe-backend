@@ -10,16 +10,16 @@ const {
 /**
  * @swagger
  * tags:
- *   name: Wallet
- *   description: Wallet & Transaction APIs
+ *   name: Transactions
+ *   description: Transaction & Wallet APIs
  */
 
 /**
  * @swagger
- * /api/wallet/add-money:
+ * /api/transactions/add-money:
  *   post:
  *     summary: Add money to wallet
- *     tags: [Wallet]
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -46,10 +46,10 @@ router.post("/add-money", protect, addMoney);
 
 /**
  * @swagger
- * /api/wallet/send-money:
+ * /api/transactions/send-money:
  *   post:
  *     summary: Send money to another user via UPI
- *     tags: [Wallet]
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -86,10 +86,10 @@ router.post("/send-money", protect, sendMoney);
 
 /**
  * @swagger
- * /api/wallet/history:
+ * /api/transactions/history:
  *   get:
  *     summary: Get transaction history of logged-in user
- *     tags: [Wallet]
+ *     tags: [Transactions]
  *     security:
  *       - bearerAuth: []
  *     responses:
